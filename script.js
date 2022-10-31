@@ -4,6 +4,7 @@ const starsContainer = document.querySelector(".stars-container");
 const ratingHeader = document.querySelector(".rating-header");
 const submitBtn = document.querySelector(".btn-send");
 const messageHolder = document.querySelector(".message");
+const rate = document.querySelector(".rate");
 
 console.log(stars);
 
@@ -24,6 +25,7 @@ submitBtn.addEventListener("click", () => {
   let activeStars = document.querySelectorAll(".active");
 
   ratingHeader.innerText = "Thank you for your Feedback";
+  rate.innerText = `Your rate: ${activeStars.length}/${stars.length}`;
 
   if (activeStars.length >= 4) {
     messageHolder.innerText = `We hope you really liked the visit by us and we hope, we see us again😜(If you have anyway some advice to us, message us😁)`;
