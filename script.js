@@ -1,3 +1,5 @@
+`use strict`;
+
 const stars = document.querySelectorAll(".star");
 const ratingContainer = document.querySelector(".rating-container");
 const starsContainer = document.querySelector(".stars-container");
