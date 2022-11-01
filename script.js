@@ -8,20 +8,43 @@ const rate = document.querySelector(".rate");
 
 console.log(stars);
 
-function testFunction() {
+let activeStars = [];
+
+function markStars() {
   stars.forEach((star, i) => {
     star.addEventListener("click", () => {
       for (let index = 0; index <= i && index < stars.length; index++) {
         const element = stars[index];
         element.classList.toggle("active");
+
+        if (element.classList.contains("active")) {
+          activeStars.push(element);
+        }
+
+        localStorage.setItem("starred", JSON.stringify(activeStars));
       }
     });
   });
 }
 
-testFunction();
+markStars();
+
+let active = JSON.parse(localStorage.getItem("starred"));
+
+console.log(active);
+
+function keepMarked() {
+  for (let index = 0; index < active.length; index++) {
+    const element = stars[index];
+    element.classList.add("active");
+  }
+}
+
+window.addEventListener("DOMContentLoaded", keepMarked);
 
 submitBtn.addEventListener("click", () => {
+  localStorage.clear();
+
   let activeStars = document.querySelectorAll(".active");
 
   ratingHeader.innerText = "Thank you for your Feedback";
