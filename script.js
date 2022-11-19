@@ -12,24 +12,32 @@ console.log(stars);
 
 let activeStars = [];
 
-function markStars() {
-  stars.forEach((star, i) => {
-    star.addEventListener("click", () => {
-      for (let index = 0; index <= i && index < stars.length; index++) {
-        const element = stars[index];
-        element.classList.toggle("active");
+stars.forEach((star, i) => {
+  star.addEventListener("click", () => {
+    markStars(i);
+  });
+});
 
-        if (element.classList.contains("active")) {
-          activeStars.push(element);
-        }
+function markStars(idx) {
+  if (
+    stars[idx].classList.contains("active") &&
+    !stars[idx].nextElementSibling.classList.contains("active")
+  ) {
+    idx--;
+  }
 
-        localStorage.setItem("starred", JSON.stringify(activeStars));
-      }
-    });
+  stars.forEach((star, idx2) => {
+    if (idx2 <= idx) {
+      star.classList.add("active");
+      activeStars.push(star);
+      localStorage.setItem("starred", JSON.stringify(activeStars));
+    } else {
+      star.classList.remove("active");
+      activeStars.splice(idx2, 1);
+      localStorage.setItem("starred", JSON.stringify(activeStars));
+    }
   });
 }
-
-markStars();
 
 let active = JSON.parse(localStorage.getItem("starred"));
 
